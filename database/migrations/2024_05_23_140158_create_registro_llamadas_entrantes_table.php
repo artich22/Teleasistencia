@@ -33,6 +33,7 @@ return new class extends Migration
                 'Llamada entrante por accidente doméstico',
                 'Otras llamadas entrantes'
             ]);
+            $table->string('archivo')->nullable();
             $table->timestamps();
         });
     }

@@ -22,6 +22,7 @@ class Saliente extends Model
         'observaciones',
         'dni_beneficiario',
         'tipo',
+        'archivo',
     ];
 
     public function beneficiario()

@@ -24,5 +24,6 @@ class Entrante extends Model
         'duracion',
         'tipo_llamada',
         'observaciones',
+        'archivo',
     ];
 }

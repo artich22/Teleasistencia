@@ -13,6 +13,7 @@
             </ul>
         </div>
     @endif
+    
     <form class="beneficiary-form" method="post" action="{{ route('entrantes.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="form-grid">
@@ -62,8 +63,12 @@
             <label for="observaciones">Observaciones</label>
             <textarea id="observaciones" name="observaciones" rows="4" cols="50"></textarea>
         </div>
+        <div class="form-group">
+            <label for="archivo">Archivo de audio adjunto</label>
+            <input type="file" id="archivo" name="archivo" accept="audio/*" required />
+        </div>
         <div class="form-actions">
-            <button type="submit" class="btn-submit">Dar de alta</button>
+            <button type="submit" class="btn-submit">Registrar llamada entrante</button>
         </div>
     </form>
 @endsection

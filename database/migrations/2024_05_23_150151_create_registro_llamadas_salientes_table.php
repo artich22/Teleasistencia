@@ -35,6 +35,8 @@ return new class extends Migration
                 'Llamada saliente para recordatorio de cita médica',
                 'Llamada saliente para felicitación de cumpleaños'
             ]);
+
+            $table->string('archivo')->nullable();
             $table->timestamps();
             
             $table->foreign('dni_beneficiario')->references('dni')->on('beneficiarios')
