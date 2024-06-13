@@ -31,8 +31,15 @@ class SalientesController extends Controller
             'duracion' => 'required|string|max:10',
             'observaciones' => 'nullable|string',
             'dni_beneficiario' => 'required|string|max:9',
+            'archivo' => 'required|file|mimes:mp3,wav,aac,ogg',
             'tipo' => 'required|string|in:Llamada saliente rutinaria por la mañana,Llamada saliente rutinaria por la tarde,Llamada saliente rutinaria por la noche,Llamada saliente para recordatorio de cita médica,Llamada saliente para felicitación de cumpleaños',
         ]);
+        if ($request->hasFile('archivo')) {
+            $fileName = time().'.'.$request->archivo->extension();
+            $request->file('archivo')->storeAs('audios', $fileName, 'public');
+        } else {
+            return back()->withErrors(['archivo' => 'Error al subir el archivo. Intente de nuevo.']);
+        }
 
         $registroLlamada = new Saliente();
         $registroLlamada->email = $request->email;
@@ -47,8 +54,9 @@ class SalientesController extends Controller
         $registroLlamada->observaciones = $request->observaciones;
         $registroLlamada->dni_beneficiario = $request->dni_beneficiario;
         $registroLlamada->tipo = $request->tipo;
+        $registroLlamada->archivo = $fileName;
         $registroLlamada->save();
 
-        return redirect()->route('salientes.index')->with('success', '¡Registro de llamada saliente exitoso!');
+        return redirect()->route('salientes.create')->with('success', '¡Registro de llamada saliente exitoso!');
     }
 }

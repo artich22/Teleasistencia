@@ -59,7 +59,7 @@ Route::middleware([Authenticate::class])->group(function () {
         Route::get('/cita', [EntrantesController::class, 'register'])->name('entrantes.cita');
         Route::post('/cita', [EntrantesController::class, 'registrarcita'])->name('entrantes.rescita');
         Route::post('/store', [EntrantesController::class, 'store'])->name('entrantes.store');
-        Route::get('/error', [EntrantesController::class, 'error'])->name('entrantes.error');
+        Route::get('/rest', [EntrantesController::class, 'error'])->name('entrantes.error');
     });
 
     // Rutas de salientes
@@ -67,6 +67,7 @@ Route::middleware([Authenticate::class])->group(function () {
         Route::get('/', [SalientesController::class, 'index'])->name('salientes.index');
         Route::get('/register', [SalientesController::class, 'create'])->name('salientes.create');
         Route::post('/', [SalientesController::class, 'store'])->name('salientes.store');
+        Route::get('/rest', [EntrantesController::class, 'error'])->name('entrantes.error');
     });
 
     // Rutas de informes
