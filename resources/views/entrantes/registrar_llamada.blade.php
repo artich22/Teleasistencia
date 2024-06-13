@@ -17,7 +17,7 @@
         @csrf
         <div class="form-grid">
 
-            <input type="hidden" id="discord" name="discord" value="{{ Auth::user()->discord }}" required />
+            <input type="hidden" id="email" name="email" value="{{Auth::user()->email}}" required />
             <div class="form-group">
                 <label for="email_users">Email entrante</label>
                 <input type="text" id="email_users" name="email_users" placeholder="Email entrante" required />

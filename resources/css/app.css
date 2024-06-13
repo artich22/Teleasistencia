@@ -5,6 +5,7 @@ body {
 }
 
 .formoid-solid-red {
+    border-radius: 50px;
     background-color: #FFFFFF;
     font-size: 14px;
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
@@ -128,8 +129,7 @@ p {
     display: flex;
     flex-direction: column;
     justify-content: flex-start; 
-    height: 100vh;
-    margin-top: 177px;
+    margin-top: 140px;
 }
 .bloque-gestion{
     display: flex;

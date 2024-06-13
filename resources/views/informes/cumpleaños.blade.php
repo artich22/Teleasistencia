@@ -2,7 +2,7 @@
 
 @section('seccion', 'Informes')
 @section('title', 'Beneficiarios que Cumplen Años Hoy')
-@section('ruta_volver', route('informes.index'))
+@section('ruta_volver', route('informes.previstas'))
 @section('content')
     @if($resultados->isEmpty())
         <p class="alert alert-danger">No hay beneficiarios que cumplan años hoy.</p>

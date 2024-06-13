@@ -2,7 +2,7 @@
 
 @section('seccion', 'Gestión')
 @section('title', 'Asignar datos de interés')
-@section('ruta_volver', route('informes.index'))
+@section('ruta_volver', route('informes.consultar'))
 @section('content')
 @if ($errors->any())
 <div class="alert alert-danger">

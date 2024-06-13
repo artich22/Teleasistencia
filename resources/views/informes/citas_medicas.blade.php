@@ -2,7 +2,7 @@
 
 @section('seccion', 'Informes')
 @section('title', 'Citas Médicas Previstas para Hoy')
-@section('ruta_volver', route('informes.index'))
+@section('ruta_volver', route('informes.previstas'))
 @section('content')
     @if($resultados->isEmpty())
         <p class="alert alert-danger">No hay citas médicas previstas para hoy.</p>

@@ -27,30 +27,30 @@
                     <tr class="custom-row">
                         <td class="custom-cell">
                             <a href="{{ route('informes.beneficiarios.buscar') }}" class="click">
-                                <img src="{{ asset('images/alta.png') }}" alt="Gestión de Usuarios" border="0"
+                                <img src="{{ asset('images/re.png') }}" alt="Gestión de Usuarios" border="0"
                                     class="img-index">
-                                <p>Listado de beneficiarios</p>
+                                <p>Informes de beneficiarios</p>
                             </a>
                         </td>
                         <td class="custom-cell">
                             <a href="{{ route('informes.contactos.buscar') }}" class="click"><img
-                                    src="{{ asset('images/entrantes200.jpg') }}" alt="Llamadas Entrantes" border="0"
+                                    src="{{ asset('images/modificar-contacto.png') }}" alt="Llamadas Entrantes" border="0"
                                     class="img-index">
-                                <p>Modificar beneficiario</p>
+                                <p>Lista de contactos</p>
                             </a>
                         </td>
                         <td class="custom-cell">
                             <a href="{{ route('informes.consultar') }}" class="click">
-                                <img src="{{ asset('images/alta.png') }}" alt="Gestión de Usuarios" border="0"
+                                <img src="{{ asset('images/llamada-cita.png') }}" alt="Gestión de Usuarios" border="0"
                                     class="img-index">
-                                <p>Alta de nuevo beneficiario</p>
+                                <p>Listas de datos de interes beneficiarios</p>
                             </a>
                         </td>
                         <td class="custom-cell">
                             <a href="{{ route('informes.previstas') }}" class="click"><img
-                                    src="{{ asset('images/entrantes200.jpg') }}" alt="Llamadas Entrantes" border="0"
+                                    src="{{ asset('images/tlf.png') }}" alt="Llamadas Entrantes" border="0"
                                     class="img-index">
-                                <p>Modificar beneficiario</p>
+                                <p>Llamadas previstas</p>
                             </a>
                         </td>
                     </tr>
@@ -61,15 +61,21 @@
                     <tr class="custom-row">
                         <td class="custom-cell">
                             <a href="{{ route('informes.entrantes') }}" class="click">
-                                <img src="{{ asset('images/alta.png') }}" alt="Gestión de Usuarios" border="0"
+                                <img src="{{ asset('images/llamada-entrante.png') }}" alt="Gestión de Usuarios" border="0"
                                     class="img-index">
-                                <p>Alta de nuevo beneficiario</p>
+                                <p>Registro de llamadas entrantes(hoy)</p>
                             </a>
                         </td>
                         <td class="custom-cell">
                             <a href="{{ route('informes.salientes') }}" class="click">
-                                <img src="{{ asset('images/alta.png') }}" alt="Gestión de Usuarios" border="0" class="img-index">
-                                <p>Alta de nuevo beneficiario</p>
+                                <img src="{{ asset('images/llamada-saliente.png') }}" alt="Gestión de Usuarios" border="0" class="img-index">
+                                <p>Registro de llamadas salientes(hoy)</p>
+                            </a>
+                        </td>
+                        <td class="custom-cell">
+                            <a href="{{ route('evaluar.index') }}" class="click">
+                                <img src="{{ asset('images/1.png') }}" alt="Gestión de Usuarios" border="0" class="img-index">
+                                <p>Evaluación compañero</p>
                             </a>
                         </td>
                     </tr>

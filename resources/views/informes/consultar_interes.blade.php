@@ -21,7 +21,7 @@
             <input type="text" id="dni" name="dni" placeholder="Introduce el DNI" required>
         </div>
         <div class="form-actions">
-            <button type="submit" class="btn-submit">Asignar</button>
+            <button type="submit" class="btn-submit">Consultar</button>
         </div>
     </form>
 @endsection

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EntrantesController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EvaluarController;
 use App\Http\Controllers\GestionController;
 use App\Http\Controllers\InformesController;
 use App\Http\Controllers\SalientesController;
@@ -89,7 +90,15 @@ Route::middleware([Authenticate::class])->group(function () {
         Route::delete('/{id}', [UserController::class, 'destroy'])->name('usuarios.destroy');
         Route::post('/{usuario}/verificar', [UserController::class, 'verificar'])->name('usuarios.verificar');
     });
-
+    //Rutas evaluación
+    Route::prefix('evaluar')->group(function(){
+        Route::get('/', [EvaluarController::class, 'index'])->name('evaluar.index');
+        Route::get('/resultado', [EvaluarController::class, 'result'])->name('evaluar.result');
+        Route::get('/usuario', [EvaluarController::class, 'evaluarUsuario'])->name('evaluar.usuario');
+        Route::post('/usuario', [EvaluarController::class, 'storeUsuario'])->name('evaluar.usuario.store');
+        Route::get('/teleoperador', [EvaluarController::class, 'evaluarTeleoperador'])->name('evaluar.teleoperador');
+        Route::post('/teleoperador', [EvaluarController::class, 'storeTeleoperador'])->name('evaluar.teleoperador.store');
+    });
 
     
 });

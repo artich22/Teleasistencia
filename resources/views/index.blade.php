@@ -54,23 +54,18 @@
                             <p>Informes</p>
                         </a>
                     </td>
+
+                @if (Auth::user()->perfil == 1)
+                    <td class="custom-cell">
+                        <a href="{{ route('usuarios') }}" class="click">
+                            <img src="{{ asset('images/lista-usuarios.png') }}" alt="Gestión de Usuarios" border="0" class="img-index">
+                            <p>Lista de usuarios</p>
+                        </a>
+                    </td>
+                @endif
                 </tr>
             </tbody>
         </table>
-        @if (Auth::user()->perfil == 1)
-            <table class="custom-table" width="880px" border="0">
-                <tbody>
-                    <tr class="custom-row">
-                        <td class="custom-cell">
-                            <a href="{{ route('usuarios') }}" class="click">
-                                <img src="{{ asset('images/alta.png') }}" alt="Gestión de Usuarios" border="0" class="img-index">
-                                <p>Lista de usuarios</p>
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        @endif
     </form>
     </div>
 </body>
