@@ -13,12 +13,12 @@
             </ul>
         </div>
     @endif
-    <form class="beneficiary-form" method="post" action="{{ route('gestion.store') }}" enctype="multipart/form-data">
+    <form class="beneficiary-form" method="post" action="{{ route('gestion.interes.guardar') }}" enctype="multipart/form-data">
         @csrf
         <div class="form-grid">
             <div class="form-group">
                 <label for="dni_beneficiario">DNI del beneficiario</label>
-                <input type="text" id="dni_beneficiario" name="dni_beneficiario" placeholder="DNI del beneficiario" required />
+                <input type="text" id="dni_beneficiario" name="dni_beneficiario" value="{{ $dni }}" placeholder="DNI del beneficiario" required readonly/>
             </div>
             <div class="form-group">
                 <label for="enfermedades">Enfermedades (opcional)</label>
@@ -89,7 +89,7 @@
             </div>
         </div>
         <div class="form-actions">
-            <button type="submit" class="btn-submit">Crear beneficiario de interés</button>
+            <button type="submit" class="btn-submit">Asignar datos de interés</button>
         </div>
         
     </form>

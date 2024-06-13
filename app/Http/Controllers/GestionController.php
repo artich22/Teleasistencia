@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BeneficiarioInteres;
 use App\Models\Contacto;
 use App\Models\Gestion;
 use Illuminate\Http\Request;
@@ -64,6 +65,7 @@ class GestionController extends Controller
     {
         $beneficiario = Gestion::findOrFail($id);
 
+        try{
         $request->validate([
             'nombre' => 'required|string',
             'apellidos' => 'required|string',
@@ -80,10 +82,13 @@ class GestionController extends Controller
             'provincia' => 'required|string',
             'email' => 'required|string',
         ]);
+            $beneficiario->update($request->all());
+            return redirect()->route('gestion.actualizar')->with('success', 'Beneficiario actualizado con éxito');
+        } catch (\Exception $e) {
 
-        $beneficiario->update($request->all());
-
-        return redirect()->route('gestion.index')->with('success', 'Beneficiario actualizado con éxito');
+            $errorMessage = $e->getMessage();
+            return redirect()->route('gestion.actualizar')->with('error', 'Beneficiario actualizado sin éxito'. $errorMessage);
+        }
     }
 
     public function destroy($id)
@@ -106,7 +111,7 @@ class GestionController extends Controller
         if ($beneficiario) {
             return view('gestion.resultados', ['beneficiario' => $beneficiario]);
         } else {
-            return redirect()->route('gestion.buscar')->with('error', 'Beneficiario no encontrado.');
+            return redirect()->route('gestion.actualizar')->with('error', 'Beneficiario no encontrado.');
         }
     }
     public function error()
@@ -126,7 +131,7 @@ class GestionController extends Controller
         $dni = $request->input('dni');
         $contacto = Gestion::where('dni', $dni)->first();
         if (!$contacto) {
-            return redirect()->route('gestion.index')->withErrors(['dni' => 'No se encontró ningún beneficiario con ese DNI.']);
+            return redirect()->route('gestion.contactos')->with('error', 'Beneficiario no encontrado.');
         }
         return view('gestion.crear_contacto', compact('contacto'));
     }
@@ -160,9 +165,171 @@ class GestionController extends Controller
                 'email' => $request->input('email'),
             ]);
     
-            return redirect()->route('gestion.index')->with('success', 'Contacto creado exitosamente.');
+            return redirect()->route('gestion.contactos')->with('success', 'Contacto creado exitosamente.');
         } catch (\Exception $e) {
-            return redirect()->route('gestion.error.contacto')->with('error', 'Ha ocurrido un error al crear el contacto.');
+            $errorMessage = $e->getMessage();
+            return redirect()->route('gestion.error.contacto')->with('error', 'Ha ocurrido un error al crear el contacto revise si estan repetidos algun dato');
         }
     }
+    public function showDeleteForm()
+    {
+        return view('gestion.borrarbeneficiario');
+    }
+
+    public function searchBeneficiario(Request $request)
+    {
+        $request->validate([
+            'dni' => 'required|string|max:20',
+        ]);
+
+        $beneficiario = Gestion::where('dni', $request->dni)->first();
+
+        if ($beneficiario) {
+            return view('gestion.resultadosborrar', compact('beneficiario'));
+        } else {
+            return redirect()->route('gestion.borrar.beneficiario.form')->with('error', 'Beneficiario no encontrado.');
+        }
+    }
+
+    public function deleteBeneficiario($id)
+    {
+        $beneficiario = Gestion::find($id);
+
+        if ($beneficiario) {
+            $beneficiario->delete();
+            return redirect()->route('gestion.borrar.beneficiario.form')->with('success', 'Beneficiario borrado exitosamente.');
+        } else {
+            return redirect()->route('gestion.borrar.beneficiario.form')->with('error', 'Beneficiario no encontrado.');
+        }
+    }
+    public function interesview()
+    {
+        return view('gestion.asignar_interes');
+    }
+    public function interes(Request $request)
+    {
+        $request->validate([
+            'dni' => 'required|string|max:9'
+        ]);
+
+        $dni = $request->input('dni');
+        $beneficiarioInteres = BeneficiarioInteres::where('dni_beneficiario', $dni)->first();
+
+        if ($beneficiarioInteres) {
+            return redirect()->back()->with('error', 'Datos ya asignados');
+        }
+
+        return redirect()->route('gestion.interes.view', ['dni' => $dni]);
+    }
+    public function interesguardarview(Request $request)
+    {
+        $dni = $request->input('dni');
+        return view('gestion.datos_interes', compact('dni'));
+    }
+    public function interesguardar(Request $request)
+    {
+        $request->validate([
+            'dni_beneficiario' => 'required|string|max:9',
+            'enfermedades' => 'nullable|string|max:255',
+            'alergias' => 'nullable|string|max:255',
+            'medicacion_manana' => 'nullable|string|max:255',
+            'medicacion_tarde' => 'nullable|string|max:255',
+            'medicacion_noche' => 'nullable|string|max:255',
+            'hora_preferente_manana' => 'required',
+            'hora_preferente_tarde' => 'required',
+            'hora_preferente_noche' => 'required',
+            'ambulatorio' => 'required|string|max:2',
+            'ambulancia' => 'required|string|max:2',
+            'policia' => 'required|string|max:2',
+            'bomberos' => 'required|string|max:2',
+            'urgencias' => 'required|string|max:2'
+        ]);
+
+        try {
+            $beneficiarioInteres = new BeneficiarioInteres();
+            $beneficiarioInteres->dni_beneficiario = $request->dni_beneficiario;
+            $beneficiarioInteres->enfermedades = $request->enfermedades;
+            $beneficiarioInteres->alergias = $request->alergias;
+            $beneficiarioInteres->medicacion_manana = $request->medicacion_manana;
+            $beneficiarioInteres->medicacion_tarde = $request->medicacion_tarde;
+            $beneficiarioInteres->medicacion_noche = $request->medicacion_noche;
+            $beneficiarioInteres->hora_preferente_manana = $request->hora_preferente_manana;
+            $beneficiarioInteres->hora_preferente_tarde = $request->hora_preferente_tarde;
+            $beneficiarioInteres->hora_preferente_noche = $request->hora_preferente_noche;
+            $beneficiarioInteres->ambulatorio = $request->ambulatorio;
+            $beneficiarioInteres->ambulancia = $request->ambulancia;
+            $beneficiarioInteres->policia = $request->policia;
+            $beneficiarioInteres->bomberos = $request->bomberos;
+            $beneficiarioInteres->urgencias = $request->urgencias;
+
+            $beneficiarioInteres->save();
+
+            return redirect()->route('gestion.interes')->with('success', 'Beneficiario de interés creado exitosamente');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Hubo un problema al crear el beneficiario de interés');
+        }
+    }
+    public function interesmodificarview()
+    {
+        return view('gestion.modificar_interes');
+    }
+    public function interesmodificar(Request $request)
+    {
+        $request->validate([
+            'dni' => 'required|string|max:9'
+        ]);
+
+        $dni = $request->input('dni');
+        $beneficiario = Gestion::where('dni', $dni)->first();
+        $beneficiarioInteres = BeneficiarioInteres::where('dni_beneficiario', $dni)->first();
+
+        if (!$beneficiario) {
+            return redirect()->back()->with('error', 'El DNI no existe en la tabla Beneficiario.');
+        } elseif (!$beneficiarioInteres) {
+            return redirect()->back()->with('error', 'Datos no asignados.');
+        } else {
+            return view('gestion.modificar_datos_interes', compact('beneficiarioInteres'));
+        }
+    }
+    public function guardarDatosInteres(Request $request)
+    {
+        $request->validate([
+            'dni_beneficiario' => 'required|string|max:9',
+            'enfermedades' => 'nullable|string|max:255',
+            'alergias' => 'nullable|string|max:255',
+            'medicacion_manana' => 'nullable|string|max:255',
+            'medicacion_tarde' => 'nullable|string|max:255',
+            'medicacion_noche' => 'nullable|string|max:255',
+            'hora_preferente_manana' => 'required',
+            'hora_preferente_tarde' => 'required',
+            'hora_preferente_noche' => 'required',
+            'ambulatorio' => 'required|string|max:2',
+            'ambulancia' => 'required|string|max:2',
+            'policia' => 'required|string|max:2',
+            'bomberos' => 'required|string|max:2',
+            'urgencias' => 'required|string|max:2'
+        ]);
+
+        $beneficiarioInteres = new BeneficiarioInteres();
+
+        $beneficiarioInteres->dni_beneficiario = $request->dni_beneficiario;
+        $beneficiarioInteres->enfermedades = $request->enfermedades;
+        $beneficiarioInteres->alergias = $request->alergias;
+        $beneficiarioInteres->medicacion_manana = $request->medicacion_manana;
+        $beneficiarioInteres->medicacion_tarde = $request->medicacion_tarde;
+        $beneficiarioInteres->medicacion_noche = $request->medicacion_noche;
+        $beneficiarioInteres->hora_preferente_manana = $request->hora_preferente_manana;
+        $beneficiarioInteres->hora_preferente_tarde = $request->hora_preferente_tarde;
+        $beneficiarioInteres->hora_preferente_noche = $request->hora_preferente_noche;
+        $beneficiarioInteres->ambulatorio = $request->ambulatorio;
+        $beneficiarioInteres->ambulancia = $request->ambulancia;
+        $beneficiarioInteres->policia = $request->policia;
+        $beneficiarioInteres->bomberos = $request->bomberos;
+        $beneficiarioInteres->urgencias = $request->urgencias;
+
+        $beneficiarioInteres->save();
+
+        return redirect()->route('gestion.interes.buscar.modificar')->with('success', 'Datos de interés guardados correctamente.');
+    }
+
 }

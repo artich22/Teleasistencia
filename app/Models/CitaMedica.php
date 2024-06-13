@@ -25,4 +25,8 @@ class CitaMedica extends Model
         'hora',
         'observaciones',
     ];
+    public function beneficiario()
+    {
+        return $this->belongsTo(Gestion::class, 'dni_beneficiario', 'dni');
+    }
 }

@@ -6,25 +6,28 @@
 @section('title', 'Resultados de la búsqueda')
 @section('ruta_volver', route('informes.index'))
 @section('content')
-    <table border="1" width="95%" align="center">
-        <tr>
-            <td><b>Nombre</b></td>
-            <td><b>Apellidos</b></td>
-            <td><b>DNI</b></td>
-            <td><b>Teléfono</b></td>
-            <td><b>Fecha de nacimiento</b></td>
-            <td><b>Número Seg. Social</b></td>
-            <td><b>Sexo</b></td>
-            <td><b>Estado Civil</b></td>
-            <td><b>Tipo de beneficiario</b></td>
-            <td><b>Dirección</b></td>
-            <td><b>Código Postal</b></td>
-            <td><b>Localidad</b></td>
-            <td><b>Provincia</b></td>
-            <td><b>Email</b></td>
-        </tr>
-        
-        @foreach($beneficiarios as $beneficiario)
+    <h3 style="text-align: center; margin-bottom:0px;">Si quieres buscar algo en concreto pon Control+F</h3>
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>DNI</th>
+                <th>Teléfono</th>
+                <th>Fecha de nacimiento</th>
+                <th>Número Seg. Social</th>
+                <th>Sexo</th>
+                <th>Estado Civil</th>
+                <th>Tipo de beneficiario</th>
+                <th>Dirección</th>
+                <th>Código Postal</th>
+                <th>Localidad</th>
+                <th>Provincia</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($beneficiarios as $beneficiario)
             <tr>
                 <td>{{ $beneficiario->nombre }}</td>
                 <td>{{ $beneficiario->apellidos }}</td>
@@ -41,6 +44,8 @@
                 <td>{{ $beneficiario->provincia }}</td>
                 <td>{{ $beneficiario->email }}</td>
             </tr>
-        @endforeach
+            @endforeach
+        </tbody>
     </table>
+    
 @endsection

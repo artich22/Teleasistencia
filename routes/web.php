@@ -7,6 +7,9 @@ use App\Http\Controllers\InformesController;
 use App\Http\Controllers\SalientesController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\Authenticate;
+use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Client\Request as ClientRequest;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Support\Facades\Route;
 
 // Rutas de autenticación
@@ -36,7 +39,16 @@ Route::middleware([Authenticate::class])->group(function () {
         Route::post('/contactos', [GestionController::class, 'contactosbusqueda'])->name('gestion.contactos.buscar');
         Route::get('/contactos/crear', [GestionController::class, 'crearcontactos'])->name('gestion.crear.contactos');
         Route::post('/contactos/crear', [GestionController::class, 'crearContacto'])->name('gestion.crear.contactos.post');
-
+        Route::get('/baja', [GestionController::class, 'showDeleteForm'])->name('gestion.borrar.beneficiario.form');
+        Route::post('/baja', [GestionController::class, 'searchBeneficiario'])->name('gestion.borrar.beneficiario');
+        Route::delete('/baja/{id}', [GestionController::class, 'deleteBeneficiario'])->name('gestion.eliminar.beneficiario');
+        Route::get('/buscar', [GestionController::class, 'interesview'])->name('gestion.interes');
+        Route::post('/buscar', [GestionController::class, 'interes'])->name('gestion.interes.comprobar');
+        Route::get('/buscar/guardar', [GestionController::class, 'interesguardarview'])->name('gestion.interes.view');
+        Route::post('/buscar/guardar', [GestionController::class, 'interesguardar'])->name('gestion.interes.guardar');
+        Route::get('/modificar', [GestionController::class, 'interesmodificarview'])->name('gestion.interes.buscar.modificar');
+        Route::post('/modificar', [GestionController::class, 'interesmodificar'])->name('gestion.interes.buscar');
+        Route::post('/modificar/asd', [GestionController::class, 'guardarDatosInteres'])->name('gestion.interes.modificar');
     });
 
     // Rutas de entrantes
@@ -59,9 +71,26 @@ Route::middleware([Authenticate::class])->group(function () {
     // Rutas de informes
     Route::prefix('informes')->group(function(){
         Route::get('/', [InformesController::class, 'index'])->name('informes.index');
-        Route::get('/beneficiarios', [InformesController::class, 'beneficiarios'])->name('informes.beneficiarios');
-        Route::post('/beneficiarios/buscar', [InformesController::class, 'buscarBeneficiario'])->name('informes.beneficiarios.buscar');
+        // Route::get('/beneficiarios', [InformesController::class, 'beneficiarios'])->name('informes.beneficiarios');
+        Route::get('/beneficiarios', [InformesController::class, 'buscarBeneficiario'])->name('informes.beneficiarios.buscar');
+        Route::get('/contactos', [InformesController::class, 'buscarContacto'])->name('informes.contactos.buscar');
+        Route::get('/consultar', [InformesController::class, 'interesconsultarview'])->name('informes.consultar');
+        Route::post('/consultar', [InformesController::class, 'interesconsultar'])->name('informes.consultar.buscar');
+
+        Route::get('/previstas', [InformesController::class, 'llamadasprevistas'])->name('informes.previstas');
+        Route::post('/previstas', [InformesController::class, 'buscarprevistas'])->name('informes.previstas.buscar');
+        Route::get('/entrantes', [InformesController::class, 'mostrarLlamadasEntrantesHoy'])->name('informes.entrantes');
+        Route::get('/salientes', [InformesController::class, 'mostrarLlamadasSalientesHoy'])->name('informes.salientes');
     });
+
+    //Rutas Usuarios
+    Route::prefix('usuarios')->middleware('check.perfil:1')->group(function() {
+        Route::get('/', [UserController::class, 'index'])->name('usuarios');
+        Route::delete('/{id}', [UserController::class, 'destroy'])->name('usuarios.destroy');
+        Route::post('/{usuario}/verificar', [UserController::class, 'verificar'])->name('usuarios.verificar');
+    });
+
+
     
 });
 

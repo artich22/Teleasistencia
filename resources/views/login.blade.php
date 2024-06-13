@@ -24,7 +24,7 @@
                         placeholder="Escribe aquí" 
                     />
                     @if ($errors->any())
-                        <div class="alert alert-error">
+                        <div class="alertaaa alert-error">
                             <ul>
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>

@@ -15,7 +15,8 @@ return new class extends Migration
         Schema::create('contactos', function (Blueprint $table) {
             $table->id();
             $table->string('dni_beneficiario', 9);
-            $table->foreign('dni_beneficiario')->references('dni')->on('beneficiarios');
+            $table->foreign('dni_beneficiario')->references('dni')->on('beneficiarios')
+            ->onDelete('cascade');
             $table->string('email', 100)->unique();
             $table->string('nombre', 255);
             $table->string('apellidos', 255);

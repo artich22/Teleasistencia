@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('beneficiario_interes', function (Blueprint $table) {
             $table->id();
             $table->string('dni_beneficiario', 9);
-            $table->foreign('dni_beneficiario')->references('dni')->on('beneficiarios');
+            $table->foreign('dni_beneficiario')->references('dni')->on('beneficiarios')
+            ->onDelete('cascade');
             $table->string('enfermedades')->nullable();
             $table->string('alergias')->nullable();
             $table->string('medicacion_manana')->nullable();

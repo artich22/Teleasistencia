@@ -25,4 +25,9 @@ class Gestion extends Model
         'provincia',
         'email',
     ];
+
+    public function contactos()
+    {
+        return $this->hasMany(Contacto::class, 'dni_beneficiario', 'dni');
+    }
 }

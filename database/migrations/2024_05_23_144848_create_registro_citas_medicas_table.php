@@ -19,7 +19,8 @@ return new class extends Migration
             $table->text('observaciones')->nullable();
             $table->timestamps();
 
-            $table->foreign('dni_beneficiario')->references('dni')->on('beneficiarios');
+            $table->foreign('dni_beneficiario')->references('dni')->on('beneficiarios')
+            ->onDelete('cascade');
         });
     }
 

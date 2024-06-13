@@ -21,4 +21,8 @@ class Contacto extends Model
         'dni_beneficiario',
         'email',
     ];
+    public function beneficiario()
+    {
+        return $this->belongsTo(Gestion::class, 'dni_beneficiario', 'dni');
+    }
 }

@@ -26,28 +26,28 @@
                 <tbody>
                     <tr class="custom-row">
                         <td class="custom-cell">
-                            <a href="{{ route('informes.beneficiarios') }}" class="click">
+                            <a href="{{ route('informes.beneficiarios.buscar') }}" class="click">
                                 <img src="{{ asset('images/alta.png') }}" alt="Gestión de Usuarios" border="0"
                                     class="img-index">
                                 <p>Listado de beneficiarios</p>
                             </a>
                         </td>
                         <td class="custom-cell">
-                            <a href="llamada_entrante.php" class="click"><img
+                            <a href="{{ route('informes.contactos.buscar') }}" class="click"><img
                                     src="{{ asset('images/entrantes200.jpg') }}" alt="Llamadas Entrantes" border="0"
                                     class="img-index">
                                 <p>Modificar beneficiario</p>
                             </a>
                         </td>
                         <td class="custom-cell">
-                            <a href="{{ route('gestion.index') }}" class="click">
+                            <a href="{{ route('informes.consultar') }}" class="click">
                                 <img src="{{ asset('images/alta.png') }}" alt="Gestión de Usuarios" border="0"
                                     class="img-index">
                                 <p>Alta de nuevo beneficiario</p>
                             </a>
                         </td>
                         <td class="custom-cell">
-                            <a href="llamada_entrante.php" class="click"><img
+                            <a href="{{ route('informes.previstas') }}" class="click"><img
                                     src="{{ asset('images/entrantes200.jpg') }}" alt="Llamadas Entrantes" border="0"
                                     class="img-index">
                                 <p>Modificar beneficiario</p>
@@ -60,17 +60,16 @@
                 <tbody>
                     <tr class="custom-row">
                         <td class="custom-cell">
-                            <a href="{{ route('gestion.index') }}" class="click">
+                            <a href="{{ route('informes.entrantes') }}" class="click">
                                 <img src="{{ asset('images/alta.png') }}" alt="Gestión de Usuarios" border="0"
                                     class="img-index">
                                 <p>Alta de nuevo beneficiario</p>
                             </a>
                         </td>
                         <td class="custom-cell">
-                            <a href="llamada_entrante.php" class="click"><img
-                                    src="{{ asset('images/entrantes200.jpg') }}" alt="Llamadas Entrantes" border="0"
-                                    class="img-index">
-                                <p>Modificar beneficiario</p>
+                            <a href="{{ route('informes.salientes') }}" class="click">
+                                <img src="{{ asset('images/alta.png') }}" alt="Gestión de Usuarios" border="0" class="img-index">
+                                <p>Alta de nuevo beneficiario</p>
                             </a>
                         </td>
                     </tr>

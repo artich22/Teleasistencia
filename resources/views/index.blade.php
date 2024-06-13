@@ -62,15 +62,9 @@
                 <tbody>
                     <tr class="custom-row">
                         <td class="custom-cell">
-                            <a href="{{ route('gestion.index') }}" class="index-click">
-                                <img src="{{ asset('images/nuevo-usuario.png') }}" alt="Gestión de Usuarios" border="0" class="img-index">
-                                <p>Gestión de Usuarios</p>
-                            </a>
-                        </td>
-                        <td class="custom-cell">
-                            <a href="{{ route('entrantes.index') }}" class="index-click">
-                                <img src="{{ asset('images/llamada-entrante.png') }}" alt="Llamadas Entrantes" border="0" class="img-index">
-                                <p>Llamadas Entrantes</p>
+                            <a href="{{ route('usuarios') }}" class="click">
+                                <img src="{{ asset('images/alta.png') }}" alt="Gestión de Usuarios" border="0" class="img-index">
+                                <p>Lista de usuarios</p>
                             </a>
                         </td>
                     </tr>

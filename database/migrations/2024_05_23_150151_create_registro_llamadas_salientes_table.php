@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('email', 100)->unique();
             $table->string('email_users', 100)->unique();
-            $table->foreign('email_users')->references('email')->on('users');
+            $table->foreign('email_users')->references('email')->on('users')
+            ->onDelete('cascade');
             $table->enum('responde', ['Si', 'No']);
             $table->integer('intentos');
             $table->string('quien_coge', 255);
@@ -36,7 +37,8 @@ return new class extends Migration
             ]);
             $table->timestamps();
             
-            $table->foreign('dni_beneficiario')->references('dni')->on('beneficiarios');
+            $table->foreign('dni_beneficiario')->references('dni')->on('beneficiarios')
+            ->onDelete('cascade');
         });
     }
 

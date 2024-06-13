@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('email', 100)->unique();
             $table->string('email_users', 100)->unique();
-            $table->foreign('email_users')->references('email')->on('users');
+            $table->foreign('email_users')->references('email')->on('users')
+            ->onDelete('cascade');
             $table->string('quien_llama');
             $table->enum('beneficiario', ['Si', 'No']);
             $table->date('fecha');

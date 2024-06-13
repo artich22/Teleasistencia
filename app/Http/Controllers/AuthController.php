@@ -13,16 +13,22 @@ class AuthController extends Controller
     }
 
     public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
+{
+    $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($request->only('email', 'password'))) {
+    if (Auth::attempt($credentials)) {
+        // Comprobación adicional para verificar si el usuario está verificado
+        if (Auth::user()->verificado) {
             $request->session()->regenerate();
             return redirect()->route('home');
+        } else {
+            Auth::logout();
+            return redirect()->back()->withErrors(['email' => 'Necesita que un profesor verifique su cuenta.']);
         }
-
-        return redirect()->back()->withErrors(['email' => 'Las credenciales proporcionadas no son válidas.']);
     }
+
+    return redirect()->back()->withErrors(['email' => 'Datos mal introducidos.']);
+}
     public function logout(Request $request)
     {
         Auth::logout();

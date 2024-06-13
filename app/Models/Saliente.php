@@ -24,5 +24,8 @@ class Saliente extends Model
         'tipo',
     ];
 
-
+    public function beneficiario()
+    {
+        return $this->belongsTo(Gestion::class, 'dni_beneficiario', 'dni');
+    }
 }

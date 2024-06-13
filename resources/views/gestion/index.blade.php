@@ -39,12 +39,12 @@
                             </a></td>
                         <td class="custom-cell">
                             <a href="{{ route('gestion.contactos') }}" class="click">
-                                <img src="{{ asset('images/salientes200.jpg') }}" alt="Llamadas Salientes" border="0"
+                                <img src="{{ asset('images/nuevo-contacto.png') }}" alt="Contactos" border="0"
                                     class="img-index">
                                 <p>Asignación de personas de contacto</p>
                             </a></td>
                         <td class="custom-cell"><a href="informes.php" class="click"><img
-                                    src="{{ asset('images/informes200.jpg') }}" alt="Informes" border="0"
+                                    src="{{ asset('images/modificar-contacto.png') }}" alt="Contactos" border="0"
                                     class="img-index">
                                 <p>Mofidicación de personas de contacto</p>
                             </a></td>
@@ -54,21 +54,22 @@
             <table class="custom-table" width="880px" border="0" class="index">
                 <tbody>
                     <tr class="custom-row">
-                        <td class="custom-cell"><a href="{{ route('gestion.index') }}" class="click"><img
+                        <td class="custom-cell"><a href="{{ route('gestion.interes') }}" class="click"><img
                                     src="{{ asset('images/datos-interes.png') }}" alt="Gestión de Usuarios" border="0"
                                     class="img-index">
                                 <p>Datos de interés del beneficiario</p>
                             </a></td>
-                        <td class="custom-cell"><a href="llamada_entrante.php" class="click"><img
+                        <td class="custom-cell"><a href="{{ route('gestion.interes.buscar.modificar') }}" class="click"><img
                                     src="{{ asset('images/modificar-datos-interes.png') }}" alt="Llamadas Entrantes" border="0"
                                     class="img-index">
                                 <p>Modificación de datos de interes del beneficiario</p>
                             </a></td>
-                        <td class="custom-cell"><a href="llamada_saliente.php" class="click"><img
-                                    src="{{ asset('images/borrar-usuario.png') }}" alt="Llamadas Salientes" border="0"
-                                    class="img-index">
-                                <p>Dar de baja a un beneficiario (usar con precaución)</p>
-                            </a></td>
+                            <td class="custom-cell">
+                                <a href="{{ route('gestion.borrar.beneficiario.form') }}" class="click">
+                                    <img src="{{ asset('images/borrar-usuario.png') }}" border="0" class="img-index">
+                                    <p>Dar de baja a un beneficiario (usar con precaución)</p>
+                                </a>
+                            </td>
                     </tr>
                 </tbody>
             </table>

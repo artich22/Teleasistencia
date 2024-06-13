@@ -12,9 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('perfil')->default(0);
+            $table->boolean('perfil')->default(0)->after('remember_token');
+            $table->boolean('verificado')->default(0)->after('remember_token');
             // 0= Usuario 1= Profe
-            $table->date('fecha_nacimiento')->unique()->nullable(false);
+            $table->date('fecha_nacimiento')->unique()->nullable(false)->after('remember_token');
             $table->timestamp('last_login')->nullable()->after('remember_token');
         });
     }
