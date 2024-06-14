@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('seccion', 'Entrantes')
-@section('title', 'Error al crear beneficiario')
+@section('title', 'Error al registro de llamada entrante')
 @section('ruta_volver', route('entrantes.index'))
 @section('content')
 @if (session('error'))

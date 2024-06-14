@@ -57,6 +57,10 @@ class SalientesController extends Controller
         $registroLlamada->archivo = $fileName;
         $registroLlamada->save();
 
-        return redirect()->route('salientes.create')->with('success', '¡Registro de llamada saliente exitoso!');
+        return redirect()->route('salientes.error')->with('success', '¡Registro de llamada saliente exitoso!');
+    }
+    public function error()
+    {
+        return view('salientes.error');
     }
 }

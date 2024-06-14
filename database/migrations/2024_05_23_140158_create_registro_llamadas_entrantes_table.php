@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('registro_llamadas_entrantes', function (Blueprint $table) {
             $table->id();
-            $table->string('email', 100)->unique();
-            $table->string('email_users', 100)->unique();
+            $table->string('email', 100);
+            $table->string('email_users', 100);
             $table->foreign('email_users')->references('email')->on('users')
             ->onDelete('cascade');
             $table->string('quien_llama');

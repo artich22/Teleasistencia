@@ -67,7 +67,7 @@ Route::middleware([Authenticate::class])->group(function () {
         Route::get('/', [SalientesController::class, 'index'])->name('salientes.index');
         Route::get('/register', [SalientesController::class, 'create'])->name('salientes.create');
         Route::post('/', [SalientesController::class, 'store'])->name('salientes.store');
-        Route::get('/rest', [EntrantesController::class, 'error'])->name('entrantes.error');
+        Route::get('/rest', [SalientesController::class, 'error'])->name('salientes.error');
     });
 
     // Rutas de informes

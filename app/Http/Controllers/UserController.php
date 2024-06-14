@@ -29,7 +29,7 @@ class UserController extends Controller
             'fecha_nacimiento' => $request->fecha_nacimiento,
         ]);
 
-        return redirect('/')->with('success', '¡Registro exitoso!');
+        return redirect('/login')->with('success', '¡Registro exitoso!');
     }
     public function index()
     {
