@@ -51,6 +51,9 @@ Route::middleware([Authenticate::class])->group(function () {
         Route::get('/modificar', [GestionController::class, 'interesmodificarview'])->name('gestion.interes.buscar.modificar');
         Route::post('/modificar', [GestionController::class, 'interesmodificar'])->name('gestion.interes.buscar');
         Route::post('/modificar/asd', [GestionController::class, 'guardarDatosInteres'])->name('gestion.interes.modificar');
+        Route::get('/contactos/buscar', [GestionController::class, 'buscarcontacto'])->name('gestion.contactos.buscar.mod');
+        Route::post('/contactos/buscar', [GestionController::class, 'buscarPorEmail'])->name('gestion.contactos.buscar.mod.email');
+        Route::post('/contactos/modificar', [GestionController::class, 'modificarContacto'])->name('gestion.contactos.modificar');
     });
 
     // Rutas de entrantes

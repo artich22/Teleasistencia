@@ -43,7 +43,7 @@
                                     class="img-index">
                                 <p>Asignación de personas de contacto</p>
                             </a></td>
-                        <td class="custom-cell"><a href="informes.php" class="click"><img
+                        <td class="custom-cell"><a href="{{route('gestion.contactos.buscar.mod')}}" class="click"><img
                                     src="{{ asset('images/modificar-contacto.png') }}" alt="Contactos" border="0"
                                     class="img-index">
                                 <p>Mofidicación de personas de contacto</p>

@@ -331,5 +331,67 @@ class GestionController extends Controller
 
         return redirect()->route('gestion.interes.buscar.modificar')->with('success', 'Datos de interés guardados correctamente.');
     }
+    public function buscarcontacto()
+    {
+        return view('gestion.modificar_contacto'); // Vista del formulario de búsqueda
+    }
+
+    public function buscarPorEmail(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $email = $request->email;
+
+        $contacto = Contacto::where('email', $email)->first();
+        
+
+        if (!$contacto) {
+            return redirect()->back()->with('error', 'No se encontró ningún beneficiario con ese email.');
+        }
+
+        return view('gestion.modificar_contactos_view', compact('contacto'));
+    }
+    public function modificarContacto(Request $request)
+    {
+        $request->validate([
+            'dni_beneficiario' => 'required|string|max:9',
+            'nombre' => 'required|string|max:255',
+            'apellidos' => 'required|string|max:255',
+            'telefono' => 'required|string|max:20',
+            'tipo' => 'required|string|max:255',
+            'direccion' => 'required|string|max:255',
+            'codigopostal' => 'required|string|max:10',
+            'localidad' => 'required|string|max:255',
+            'provincia' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+        ]);
+
+        try {
+            $contacto = Contacto::where('dni_beneficiario', $request->dni_beneficiario)->first();
+
+            if (!$contacto) {
+                return redirect()->route('gestion.interes')->with('error', 'No se encontró ningún contacto asociado a ese beneficiario.');
+            }
+
+            $contacto->nombre = $request->nombre;
+            $contacto->apellidos = $request->apellidos;
+            $contacto->telefono = $request->telefono;
+            $contacto->tipo = $request->tipo;
+            $contacto->direccion = $request->direccion;
+            $contacto->codigopostal = $request->codigopostal;
+            $contacto->localidad = $request->localidad;
+            $contacto->provincia = $request->provincia;
+            $contacto->email = $request->email;
+
+            $contacto->save();
+
+            return redirect()->route('gestion.contactos.buscar.mod')->with('success', 'Contacto modificado exitosamente.');
+        } catch (\Exception $e) {
+            $errorMessage = $e->getMessage();
+            return redirect()->route('gestion.contactos.buscar.mod')->with('error', 'Error al modificar el contacto: ' . $errorMessage);
+        }
+    }
 
 }
