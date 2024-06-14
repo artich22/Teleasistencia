@@ -67,7 +67,7 @@
         </div>
         <div class="form-group">
             <label for="archivo">Archivo de audio adjunto</label>
-            <input type="file" id="archivo" name="archivo" accept="audio/*" required />
+            <input type="file" id="archivo" name="archivo" accept="audio/*" />
         </div>
         
         <div class="form-actions">

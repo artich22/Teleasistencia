@@ -83,7 +83,7 @@ class EntrantesController extends Controller
             'duracion' => 'required|string|max:10',
             'tipo_llamada' => 'required|string|max:255',
             'observaciones' => 'nullable|string',
-            'archivo' => 'required|file|mimes:mp3,wav,aac,ogg',
+            'archivo' => 'nullable|file|mimes:mp3,wav,aac,ogg',
 
         ]);
 
