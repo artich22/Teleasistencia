@@ -15,6 +15,7 @@
                     <th>Nombre</th>
                     <th>Email</th>
                     <th>Tipo</th>
+                    <th>Fecha creada</th>
                     <th>Nombre del archivo</th>
                     <th style="text-align: center">Descargar</th>
                 </tr>
@@ -25,6 +26,7 @@
                         <td>{{ $llamada->nombre }}</td>
                         <td>{{ $llamada->email }}</td>
                         <td>{{ $llamada->tipo_llamada }}</td>
+                        <td>{{ $llamada->created_at }}</td>
                         <td>{{ $llamada->archivo }}</td>
                         <td style="text-align: center">
                             <a href="{{ asset('storage/audios/' . $llamada->archivo) }}" class="btn-download" download>Descargar</a>
