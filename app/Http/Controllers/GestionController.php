@@ -137,7 +137,6 @@ class GestionController extends Controller
     }
     public function crearContacto(Request $request)
     {
-        // Validar los datos del formulario
         $request->validate([
             'nombre' => 'required|string|max:255',
             'apellidos' => 'required|string|max:255',
@@ -333,7 +332,7 @@ class GestionController extends Controller
     }
     public function buscarcontacto()
     {
-        return view('gestion.modificar_contacto'); // Vista del formulario de búsqueda
+        return view('gestion.modificar_contacto'); 
     }
 
     public function buscarPorEmail(Request $request)

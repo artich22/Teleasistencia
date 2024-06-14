@@ -41,7 +41,6 @@ class EntrantesController extends Controller
     }
     public function register_citas(Request $request)
     {
-        // Validación de los datos recibidos del formulario
         $request->validate([
             'email' => 'required|string|max:100',
             'email_users' => 'required|string|max:100',
@@ -54,7 +53,6 @@ class EntrantesController extends Controller
             'observaciones' => 'nullable|string',
         ]);
 
-        // Creación de un nuevo registro en la tabla 'entrantes' utilizando el modelo Entrante
         $entrante = new Entrante();
         $entrante->email = $request->email;
         $entrante->email_users = $request->email_users;
@@ -67,12 +65,10 @@ class EntrantesController extends Controller
         $entrante->observaciones = $request->observaciones;
         $entrante->save();
 
-        // Redireccionar a una vista o ruta específica después de guardar los datos
         return redirect()->route('entrantes.error')->with('success', '¡Registro de llamada entrante exitoso!');
     }
     public function store(Request $request)
     {
-        // Validación de los datos recibidos del formulario
         $request->validate([
             'email' => 'required|string|max:100',
             'email_users' => 'required|string|max:100',
@@ -93,7 +89,6 @@ class EntrantesController extends Controller
         } else {
             return back()->withErrors(['archivo' => 'Error al subir el archivo. Intente de nuevo.']);
         }
-        // Creación de un nuevo registro en la tabla 'entrantes' utilizando el modelo Entrante
         $entrante = new Entrante();
         $entrante->email = $request->email;
         $entrante->email_users = $request->email_users;
@@ -107,7 +102,6 @@ class EntrantesController extends Controller
         $entrante->archivo = $fileName;
         $entrante->save();
 
-        // Redireccionar a una vista o ruta específica después de guardar los datos
         return redirect()->route('entrantes.error')->with('success', '¡Registro de llamada entrante exitoso!');
     }
     

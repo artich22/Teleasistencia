@@ -107,7 +107,7 @@ class InformesController extends Controller
     }
     private function obtenerCitasMedicasHoy()
     {
-        $hoy = Carbon::today()->toDateString(); // Obtener la fecha de hoy
+        $hoy = Carbon::today()->toDateString();
         $citas = CitaMedica::whereDate('fecha', $hoy)->get();
 
         return $citas;
@@ -130,24 +130,16 @@ class InformesController extends Controller
     }
     public function mostrarLlamadasEntrantesHoy()
     {
-        // Obtener la fecha de hoy
         $hoy = Carbon::today()->toDateString();
-        
-        // Obtener las llamadas entrantes de hoy
         $llamadas = Entrante::whereDate('fecha', $hoy)->get();
         
-        // Devolver la vista con las llamadas
         return view('informes.registro_entrantes', compact('llamadas'));
     }
     public function mostrarLlamadasSalientesHoy()
     {
-        // Obtener la fecha de hoy
         $hoy = Carbon::today()->toDateString();
-        
-        // Obtener las llamadas salientes de hoy
         $llamadas = Saliente::whereDate('fecha', $hoy)->get();
         
-        // Devolver la vista con las llamadas
         return view('informes.registro_salientes', compact('llamadas'));
     }
 }

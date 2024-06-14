@@ -17,7 +17,6 @@ class AuthController extends Controller
     $credentials = $request->only('email', 'password');
 
     if (Auth::attempt($credentials)) {
-        // Comprobación adicional para verificar si el usuario está verificado
         if (Auth::user()->verificado) {
             $request->session()->regenerate();
             return redirect()->route('home');
