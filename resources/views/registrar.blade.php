@@ -2,6 +2,7 @@
 
 @section('title', 'Registro usuario')
 @section('content')
+@section('ruta_volver', route('login'))
     <form method="POST" action="{{ route('register') }}" class="beneficiary-form">
         @csrf
         @if ($errors->any())
